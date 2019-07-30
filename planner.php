@@ -115,9 +115,6 @@ if (!isset($_GET['id'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-    <script src="https://uicdn.toast.com/tui.code-snippet/latest/tui-code-snippet.js"></script>
-    <script src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.js"></script>
-
     <script src='fullcalendar/packages/core/main.js'></script>
     <script src='fullcalendar/packages/daygrid/main.js'></script>
     <script src='fullcalendar/packages/timegrid/main.js'></script>
