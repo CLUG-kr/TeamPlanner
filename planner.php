@@ -101,7 +101,7 @@ if (!isset($_GET['id'])) {
             <h4 class="modal-title">Modal Header</h4>
           </div>
           -->
-          <div class="modal-body" style="height: 80vh; overflow: auto">
+          <div class="modal-body" style="height: 70vh; overflow: auto">
             <div id='calendar2'></div>
           </div>
           <div class="modal-footer">
