@@ -83,7 +83,6 @@ if (!isset($_GET['id'])) {
               </tr>
             </tbody>
           </table>
-          <button id="test-btn" type="button">Click</button>
         </div>
         <div class="col-md-8">
           <div id='calendar' style='margin:10px; width:800px; height:80vh; float:right;'></div>
@@ -165,10 +164,6 @@ if (!isset($_GET['id'])) {
           nMembers++;
         });
 
-        $("#test-btn").click(function() {
-          calendar.next();
-        });
-
         $("#share-link").val(location.href);
       });
 
@@ -176,6 +171,7 @@ if (!isset($_GET['id'])) {
         var calendarEl = document.getElementById('calendar');
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
+          height: 'parent',
           plugins: [ 'interaction', 'dayGrid' ],
           defaultView: 'dayGridMonth',
           header: {
