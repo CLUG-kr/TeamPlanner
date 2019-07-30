@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--<html lang='en'>-->
+  <head>
+    <meta charset='utf-8' />
+
+    <link href='https://unpkg.com/@fullcalendar/core/main.min.css' rel='stylesheet' />
+    <link href='https://unpkg.com/@fullcalendar/daygrid/main.min.css' rel='stylesheet' />
+    <link href='https://unpkg.com/@fullcalendar/timegrid/main.min.css' rel='stylesheet' />
+
+    <script src='https://unpkg.com/@fullcalendar/core/main.min.js'></script>
+    <script src='https://unpkg.com/@fullcalendar/daygrid/main.min.js'></script>
+    <script src='https://unpkg.com/@fullcalendar/timegrid/main.min.js'></script>
+    <script src='https://unpkg.com/@fullcalendar/interaction/main.min.js'></script>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          plugins: [ 'interaction', 'dayGrid' ],
+          defaultView: 'dayGridMonth',
+          header: {
+            left: 'prev',
+            center: 'title',
+            right: 'next'
+          },
+          selectable: true,
+
+
+          events: [
+            {
+                  
+            },
+
+          ],
+
+          dateClick: function(info) {
+
+            document.getElementById("modal_click").click();
+
+            var calendarEl2 = document.getElementById('calendar2');
+
+            var calendar2 = new FullCalendar.Calendar(calendarEl2, {
+              plugins: [ 'interaction', 'timeGrid' ],
+              defaultView: 'timeGridDay',
+              defaultDate: info.dateStr,
+              header: {
+                left: 'none',
+                center: 'title',
+                right: 'none'
+              },
+              height: 'auto',
+              selectable: true,
+            });
+
+            calendar2.render();
+            calendar2.updateSize();
+            calendar2.updateSize();
+
+            $("#myModal").on("hidden.bs.modal", function() {
+              calendar2.destroy();
+            });
+          }
+
+        });
+
+        calendar.render();
+      });
+
+
+
+    </script>
+
+    <style>
+    </style>
+  </head>
+  <body>
+
+    <div id='calendar' style='margin:20px; left:0px; top:0px; width:800px; height:700px; float:left;'></div>
+
+    <button id='modal_click' style='display: none;' data-toggle="modal" data-target="#myModal">Add Event</button>
+
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+
+        <div class="modal-content">
+          <!--<div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modal Header</h4>
+          </div>-->
+          <div class="modal-body" style="height: 80vh; overflow: auto">
+            <div id='calendar2'></div>
+          </div>
+          <div class="modal-footer">
+            <input type="text" name="Event Name" style="float: left;">
+            <button id="add-event" type="button" class="btn btn-default" data-dismiss="modal">Add Event</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    
+
+  </body>
+</html>
