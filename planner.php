@@ -19,9 +19,9 @@ if (!isset($_GET['id'])) {
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Courgette&display=swap">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
-    <link href='https://unpkg.com/@fullcalendar/core/main.min.css' rel='stylesheet' />
-    <link href='https://unpkg.com/@fullcalendar/daygrid/main.min.css' rel='stylesheet' />
-    <link href='https://unpkg.com/@fullcalendar/timegrid/main.min.css' rel='stylesheet' />
+    <link href='fullcalendar/packages/core/main.css' rel='stylesheet' />
+    <link href='fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
+    <link href='fullcalendar/packages/timegrid/main.css' rel='stylesheet' />
 
     <style>
       html, th {
@@ -116,10 +116,10 @@ if (!isset($_GET['id'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-    <script src='https://unpkg.com/@fullcalendar/core/main.min.js'></script>
-    <script src='https://unpkg.com/@fullcalendar/daygrid/main.min.js'></script>
-    <script src='https://unpkg.com/@fullcalendar/timegrid/main.min.js'></script>
-    <script src='https://unpkg.com/@fullcalendar/interaction/main.min.js'></script>
+    <script src='fullcalendar/packages/core/main.js'></script>
+    <script src='fullcalendar/packages/daygrid/main.js'></script>
+    <script src='fullcalendar/packages/timegrid/main.js'></script>
+    <script src='fullcalendar/packages/interaction/main.js'></script>
 
     <script>
       function getRandomColor() {
