@@ -1,3 +1,11 @@
+<?php
+if (!isset($_GET['id'])) {
+  $id = uniqid();
+  header("Location: ?id=$id");
+  die();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -30,10 +38,30 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#" onclick="location.reload(true)"><span class="glyphicon glyphicon-refresh"></span> Refresh</a></li>
           <li><a href="#"><span class="glyphicon glyphicon-save"></span> Save</a></li>
-          <li><a href="#"><i class="fas fa-share"></i> Share</a></li>
+          <li><a href="#" data-toggle="modal" data-target="#share-modal"><i class="fas fa-share"></i> Share</a></li>
         </ul>
       </div>
     </nav>
+
+    <div class="modal fade" id="share-modal" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Share</h4>
+          </div>
+          <div class="modal-body">
+            <h1>Share This Link</h1>
+            <hr />
+            <input id="share-link" type="url" class="form-control" autofocus="autofocus"/>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
 
     <div class="container-fluid" style="margin-top:50px">
       <div class="row">
@@ -95,6 +123,8 @@
           }
         });
 
+        $("#input-member-color").val(getRandomColor());
+
         $("#btn-member-add").click(function() {
           var id = "member" + nMembers;
           var name = $("#input-member-name").val();
@@ -127,6 +157,8 @@
         $("#test-btn").click(function() {
           calendar.next();
         });
+
+        $("#share-link").val(location.href);
       });
     </script>
   </body>
