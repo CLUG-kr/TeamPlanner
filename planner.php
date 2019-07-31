@@ -53,7 +53,7 @@ if (!isset($_GET['id'])) {
           <div class="modal-body">
             <h1>Share This Link</h1>
             <hr />
-            <input id="share-link" type="url" class="form-control" autofocus="autofocus"/>
+            <input id="share-link" type="url" class="form-control" autofocus="autofocus" />
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -228,7 +228,8 @@ if (!isset($_GET['id'])) {
           nMembers++;
         });
 
-        $("#share-link").val(location.href);
+        // $("#share-link").val(location.href);
+        $("#share-link").val(location.href.replace("#", ""));
 
         $("#save-plan").click(function() {
           var id = "<?php echo $_GET['id']; ?>";
