@@ -37,7 +37,7 @@ if (!isset($_GET['id'])) {
         </div>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#" onclick="location.reload(true)"><span class="glyphicon glyphicon-refresh"></span> Refresh</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-save"></span> Save</a></li>
+          <li><a href="#" id="save-plan"><span class="glyphicon glyphicon-save"></span> Save</a></li>
           <li><a href="#" data-toggle="modal" data-target="#share-modal"><i class="fas fa-share"></i> Share</a></li>
         </ul>
       </div>
@@ -134,6 +134,69 @@ if (!isset($_GET['id'])) {
       $(document).ready(function() {
         var nMembers = 0;
 
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          height: 'parent',
+          plugins: [ 'interaction', 'dayGrid' ],
+          defaultView: 'dayGridMonth',
+          header: {
+            left: 'prev',
+            center: 'title',
+            right: 'next'
+          },
+          selectable: true,
+          events: [
+            {
+
+            },
+          ],
+          dateClick: function(info) {
+            document.getElementById("modal_click").click();
+
+            var calendarEl2 = document.getElementById('calendar2');
+            var calendar2 = new FullCalendar.Calendar(calendarEl2, {
+              height: 'parent',
+              plugins: [ 'interaction', 'timeGrid' ],
+              defaultView: 'timeGridDay',
+              defaultDate: info.dateStr,
+              header: {
+                left: 'prev',
+                center: 'title',
+                right: 'next'
+              },
+              selectable: true,
+              events: [
+                {
+
+                },
+              ],
+              select: function(info2) {
+                var name = $("#tbody-members .active .member-name").text();
+                var color = $("#tbody-members .active .member-color").css("background-color");
+                $("#add-event").off("click");
+                $("#add-event").click(function() {
+                  calendar.addEvent({
+                    title: name,
+                    start: info2.startStr,
+                    end: info2.endStr,
+                    backgroundColor: color,
+                    borderColor: color,
+                  });
+                });
+              }
+            });
+
+            calendar2.render();
+
+            $("#myModal").on("hidden.bs.modal", function() {
+              calendar2.destroy();
+            });
+          }
+        });
+
+        calendar.render();
+
         $("#input-member-color").val(getRandomColor());
 
         $("#btn-member-add").click(function() {
@@ -166,8 +229,39 @@ if (!isset($_GET['id'])) {
         });
 
         $("#share-link").val(location.href);
-      });
 
+        $("#save-plan").click(function() {
+          var id = "<?php echo $_GET['id']; ?>";
+          var names = [];
+          var colors = [];
+          var plans;
+
+          $(".member-name").each(function(i) {
+            names.push($(this).text());
+          });
+          $(".member-color").each(function(i) {
+            colors.push($(this).css("background-color"));
+          });
+          const getCircularReplacer = () => {
+            const seen = new WeakSet();
+            return (key, value) => {
+              if (typeof value === "object" && value !== null) {
+                if (seen.has(value)) {
+                  return;
+                }
+                seen.add(value);
+              }
+              return value;
+            };
+          };
+          plans = JSON.stringify(calendar.getEvents(), getCircularReplacer());
+          console.log(id);
+          console.log(names);
+          console.log(colors);
+          console.log(plans);
+        });
+      });
+/*
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
 
@@ -228,6 +322,7 @@ if (!isset($_GET['id'])) {
 
         calendar.render();
       });
+*/
     </script>
   </body>
 </html>
