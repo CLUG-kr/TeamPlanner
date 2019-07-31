@@ -151,9 +151,9 @@ if (!isset($_GET['id'])) {
           $("#tbody-members .active").removeClass("active");
           $("#tbody-members").append("<tr id=\"" + id + "\" class=\"active\"></tr>");
           $("tr#" + id).
-            html("<td id=\"" + id + "-name\">" + name + "</td>" +
-            "<td id=\"" + id + "-color\" style=\"background: " + color + "\"></td>" +
-            "<td id=\"" + id + "-remove\"><a href=\"#\"><i class=\"fas fa-user-minus\"></i></a></td>").
+            html("<td id=\"" + id + "-name\" class=\"member-name\">" + name + "</td>" +
+            "<td id=\"" + id + "-color\" class=\"member-color\" style=\"background: " + color + "\"></td>" +
+            "<td id=\"" + id + "-remove\" class=\"member-remove\"><a href=\"#\"><i class=\"fas fa-user-minus\"></i></a></td>").
             click(function() {
               $("#tbody-members .active").removeClass("active");
               $(this).addClass("active");
@@ -203,14 +203,16 @@ if (!isset($_GET['id'])) {
               selectable: true,
 
               select: function(info2) {
+                var name = $("#tbody-members .active .member-name").text();
+                var color = $("#tbody-members .active .member-color").css("background-color");
                 $("#add-event").off("click");
                 $("#add-event").click(function() {
                   calendar.addEvent({
-                    title: 'name',
+                    title: name,
                     start: info2.startStr,
                     end: info2.endStr,
-                    backgroundColor: 'red',
-                    borderColor: 'red',
+                    backgroundColor: color,
+                    borderColor: color,
                   });
                 });
               }
