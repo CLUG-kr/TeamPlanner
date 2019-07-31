@@ -83,6 +83,7 @@ if (!isset($_GET['id'])) {
               </tr>
             </tbody>
           </table>
+          <button id="test-btn" type="button">Click</button>
         </div>
         <div class="col-md-8">
           <div id='calendar' style='margin:10px; width:800px; height:80vh; float:right;'></div>
@@ -94,14 +95,13 @@ if (!isset($_GET['id'])) {
 
     <div class="modal fade" id="myModal" role="dialog">
       <div class="modal-dialog">
+
         <div class="modal-content">
-          <!--
-          <div class="modal-header">
+          <!--<div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Modal Header</h4>
-          </div>
-          -->
-          <div class="modal-body" style="height: 70vh; overflow: auto">
+          </div>-->
+          <div class="modal-body" style="height: 80vh; overflow: auto">
             <div id='calendar2'></div>
           </div>
           <div class="modal-footer">
@@ -164,6 +164,10 @@ if (!isset($_GET['id'])) {
           nMembers++;
         });
 
+        $("#test-btn").click(function() {
+          calendar.next();
+        });
+
         $("#share-link").val(location.href);
       });
 
@@ -171,7 +175,6 @@ if (!isset($_GET['id'])) {
         var calendarEl = document.getElementById('calendar');
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
-          height: 'parent',
           plugins: [ 'interaction', 'dayGrid' ],
           defaultView: 'dayGridMonth',
           header: {
@@ -181,7 +184,8 @@ if (!isset($_GET['id'])) {
           },
           selectable: true,
           events: [
-            {    
+            {
+
             },
           ],
           dateClick: function(info) {
@@ -199,10 +203,22 @@ if (!isset($_GET['id'])) {
               },
               height: 'auto',
               selectable: true,
+
+              select: function(info2) {
+                $("#add-event").off("click");
+                $("#add-event").click(function() {
+                  calendar.addEvent({
+                    title: 'name',
+                    start: info2.startStr,
+                    end: info2.endStr,
+                    backgroundColor: 'red',
+                    borderColor: 'red',
+                  });
+                });
+              }
             });
 
             calendar2.render();
-            calendar2.updateSize();
 
             $("#myModal").on("hidden.bs.modal", function() {
               calendar2.destroy();
